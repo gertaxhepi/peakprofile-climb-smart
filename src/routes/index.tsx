@@ -58,7 +58,7 @@ function Index() {
             <span aria-hidden="true" className="h-[7px] w-[7px] rounded-full bg-muted-foreground/60" />
             Decision support for mountaineers
           </p>
-          <h1 className="mt-6 max-w-[18ch] text-[40px] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[58px] md:text-[68px]">
+          <h1 className="mt-6 max-w-[22ch] text-[38px] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[52px] md:text-[60px]">
             Know your readiness.
             <br className="hidden sm:block" /> Choose your next mountain.
           </h1>
