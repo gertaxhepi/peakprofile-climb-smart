@@ -77,12 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "PeakProfile | Prepare for Your Next Expedition" },
+      {
+        name: "description",
+        content:
+          "PeakProfile will help mountaineers understand their expedition readiness and connect with the guides and participants preparing for the same mountain objective.",
+      },
+      { name: "author", content: "PeakProfile" },
+      { property: "og:site_name", content: "PeakProfile" },
       { property: "og:type", content: "website" },
+
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
     ],
