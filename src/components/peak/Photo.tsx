@@ -1,4 +1,10 @@
+import heroPhoto from "@/assets/hero-yellow-tent.png.asset.json";
+import readinessPhoto from "@/assets/snow-crossing.png.asset.json";
+import teamPhoto from "@/assets/base-camp.png.asset.json";
+import waitlistPhoto from "@/assets/cabin-sunset.png.asset.json";
+
 type PhotoProps = {
+
   src: string;
   alt: string;
   position?: string;
@@ -37,19 +43,20 @@ export function Photo({
 
 export const PHOTOS = {
   hero: {
-    src: "/photos/hero-yellow-tent.jpg",
-    alt: "A yellow expedition tent pitched below a dramatic snow-covered mountain range at dusk.",
+    src: heroPhoto.url,
+    alt: "A yellow expedition tent pitched on a rocky high camp at dawn, with snow-covered Himalayan peaks stretching to the horizon.",
   },
   readiness: {
-    src: "/photos/snow-crossing.jpg",
-    alt: "A single mountaineer crossing a vast open snowfield, dwarfed by the surrounding glacier.",
+    src: readinessPhoto.url,
+    alt: "A single skier crossing a vast open snowfield in soft blue light, with ski tracks converging in the foreground.",
   },
   team: {
-    src: "/photos/base-camp.jpg",
-    alt: "Expedition tents at a high-altitude base camp beneath a heavily glaciated mountain face.",
+    src: teamPhoto.url,
+    alt: "Yellow expedition tents at a glacier base camp beneath a huge icefall and snow-covered summit.",
   },
   waitlist: {
-    src: "/photos/cabin-sunset.jpg",
-    alt: "A small dark mountain cabin in deep snow with distant peaks under a soft pink sunset.",
+    src: waitlistPhoto.url,
+    alt: "A dark A-frame mountain hut half buried in deep snow under a soft pink and lilac sunset sky.",
   },
 } as const;
+

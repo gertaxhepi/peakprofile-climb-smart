@@ -232,7 +232,7 @@ function Index() {
           <Photo
             src={PHOTOS.waitlist.src}
             alt={PHOTOS.waitlist.alt}
-            position="50% 35%"
+            position="50% 68%"
             overlayClassName="bg-charcoal/50"
             className="rounded-[24px] p-3 sm:rounded-[36px] sm:p-6"
           >
