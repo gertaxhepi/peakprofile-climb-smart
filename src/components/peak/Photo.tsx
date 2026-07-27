@@ -1,4 +1,10 @@
+import heroPhoto from "@/assets/hero-yellow-tent.png.asset.json";
+import readinessPhoto from "@/assets/snow-crossing.png.asset.json";
+import teamPhoto from "@/assets/base-camp.png.asset.json";
+import waitlistPhoto from "@/assets/cabin-sunset.png.asset.json";
+
 type PhotoProps = {
+
   src: string;
   alt: string;
   position?: string;
