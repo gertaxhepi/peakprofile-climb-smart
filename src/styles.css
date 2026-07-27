@@ -22,6 +22,11 @@
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Helvetica, Arial, sans-serif;
   --color-soft: var(--soft);
+  --color-plum: var(--plum);
+  --color-charcoal: var(--charcoal);
+  --color-ice: var(--ice);
+  --color-alpine: var(--alpine);
+
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
