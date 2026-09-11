@@ -84,6 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "PeakProfile will help mountaineers understand their expedition readiness and connect with the guides and participants preparing for the same mountain objective.",
       },
       { name: "author", content: "PeakProfile" },
+      {
+        name: "google-site-verification",
+        content: "40Oz1aaxmfQ45Ltjr6zXzAb4O7vI_mKzi_EGP_l6Vc4",
+      },
       { property: "og:site_name", content: "PeakProfile" },
       { property: "og:type", content: "website" },
 
