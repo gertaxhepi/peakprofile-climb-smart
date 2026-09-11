@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Logo } from "@/components/peak/Logo";
 import { Photo, PHOTOS } from "@/components/peak/Photo";
 import { WaitlistForm } from "@/components/peak/WaitlistForm";
@@ -75,6 +76,12 @@ function PointList({ points, tone }: { points: string[]; tone: "light" | "dark" 
 }
 
 function Index() {
+  useEffect(() => {
+    if (window.location.hash === "#top") {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       {/* HERO */}
@@ -95,7 +102,14 @@ function Index() {
                 What it is
               </a>
             </nav>
-            <a href="#top" className="justify-self-start text-white sm:justify-self-center">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="justify-self-start text-white sm:justify-self-center"
+            >
               <span className="sr-only">PeakProfile home</span>
               <Logo />
             </a>
