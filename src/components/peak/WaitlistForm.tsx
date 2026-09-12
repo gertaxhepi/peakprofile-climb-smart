@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type Ref } from "react";
 import { z } from "zod";
 import { joinWaitlist } from "@/lib/waitlist.functions";
 
@@ -11,7 +11,11 @@ const emailSchema = z
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export function WaitlistForm() {
+type WaitlistFormProps = {
+  inputRef?: Ref<HTMLInputElement>;
+};
+
+export function WaitlistForm({ inputRef }: WaitlistFormProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -52,6 +56,7 @@ export function WaitlistForm() {
             Your email address
           </label>
           <input
+            ref={inputRef}
             id="waitlist-email"
             name="email"
             type="email"
