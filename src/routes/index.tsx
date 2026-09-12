@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Logo } from "@/components/peak/Logo";
 import { Photo, PHOTOS } from "@/components/peak/Photo";
 import { WaitlistForm } from "@/components/peak/WaitlistForm";
@@ -86,11 +86,32 @@ function PointList({ points, tone }: { points: string[]; tone: "light" | "dark" 
 }
 
 function Index() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const explanationRef = useRef<HTMLElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    if (window.location.hash === "#top") {
+    if (window.location.hash) {
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }
   }, []);
+
+  function preferredScrollBehavior(): ScrollBehavior {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  }
+
+  function scrollToExplanation() {
+    explanationRef.current?.scrollIntoView({ behavior: preferredScrollBehavior() });
+  }
+
+  function scrollToHeroForm() {
+    const behavior = preferredScrollBehavior();
+    heroRef.current?.scrollIntoView({ behavior });
+    window.setTimeout(
+      () => emailInputRef.current?.focus({ preventScroll: true }),
+      behavior === "smooth" ? 500 : 0,
+    );
+  }
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
@@ -102,36 +123,40 @@ function Index() {
         overlayClassName="bg-charcoal/45"
         className="min-h-[92svh] p-3 sm:p-6 lg:p-8"
       >
-        <div className="flex min-h-[calc(92svh-1.5rem)] flex-col rounded-[22px] border border-white/30 px-5 py-6 sm:min-h-[calc(92svh-3rem)] sm:rounded-[32px] sm:px-8 sm:py-8 lg:min-h-[calc(92svh-4rem)]">
+        <div
+          ref={heroRef}
+          className="flex min-h-[calc(92svh-1.5rem)] flex-col rounded-[22px] border border-white/30 px-5 py-6 sm:min-h-[calc(92svh-3rem)] sm:rounded-[32px] sm:px-8 sm:py-8 lg:min-h-[calc(92svh-4rem)]"
+        >
           <header className="grid grid-cols-[1fr_auto] items-center gap-4 text-white sm:grid-cols-3">
             <nav aria-label="Primary" className="hidden sm:block">
-              <a
-                href="#what-it-is"
-                className="text-[14px] text-white/85 transition-opacity hover:opacity-60"
+              <button
+                type="button"
+                onClick={scrollToExplanation}
+                className="text-[14px] text-white/85 transition-opacity hover:opacity-60 focus-visible:outline-white"
               >
                 What it is
-              </a>
+              </button>
             </nav>
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="justify-self-start text-white sm:justify-self-center"
+            <button
+              type="button"
+              onClick={() =>
+                window.scrollTo({ top: 0, behavior: preferredScrollBehavior() })
+              }
+              className="justify-self-start text-white focus-visible:outline-white sm:justify-self-center"
             >
               <span className="sr-only">PeakProfile home</span>
               <Logo />
-            </a>
-            <a
-              href="#waitlist"
-              className="justify-self-end rounded-full border border-white/70 px-5 py-2 text-[13px] font-medium text-white transition-colors hover:bg-white hover:text-charcoal"
+            </button>
+            <button
+              type="button"
+              onClick={scrollToHeroForm}
+              className="justify-self-end rounded-full border border-white/70 px-5 py-2 text-[13px] font-medium text-white transition-colors hover:bg-white hover:text-charcoal focus-visible:outline-white"
             >
               Notify me
-            </a>
+            </button>
           </header>
 
-          <div id="top" className="flex flex-1 flex-col justify-center py-16 text-white sm:py-24">
+          <div className="flex flex-1 flex-col justify-center py-12 text-white sm:py-16">
             <p className="text-[13px] uppercase tracking-[0.16em] text-white/75">
               A better way to prepare for the mountain
             </p>
@@ -143,15 +168,26 @@ function Index() {
               PeakProfile will help mountaineers understand whether they are ready for an
               expedition and connect with the people preparing for the same objective.
             </p>
-            <div className="mt-10">
-              <a
-                href="#waitlist"
-                className="inline-flex w-full items-center justify-center rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-charcoal transition-transform hover:-translate-y-[2px] sm:w-auto"
-              >
-                Notify me when it&rsquo;s ready
-              </a>
-            </div>
+            <WaitlistForm inputRef={emailInputRef} />
           </div>
+
+          <button
+            type="button"
+            onClick={scrollToExplanation}
+            aria-label="Learn more about PeakProfile."
+            className="mb-4 inline-flex h-10 w-10 shrink-0 items-center justify-center self-center rounded-full border border-white/45 text-white/85 transition-transform hover:translate-y-0.5 hover:border-white/75 hover:text-white focus-visible:outline-white"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="h-5 w-5"
+            >
+              <path d="m7 10 5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
 
           <div className="flex flex-col gap-2 border-t border-white/25 pt-5 text-[13px] text-white/75 sm:flex-row sm:items-center sm:justify-between">
             <p>Currently in development</p>
@@ -162,7 +198,7 @@ function Index() {
 
       <main>
         {/* WHAT PEAKPROFILE IS */}
-        <section id="what-it-is" className="mx-auto w-full max-w-6xl px-4 py-24 sm:px-6 sm:py-36">
+        <section ref={explanationRef} className="mx-auto w-full max-w-6xl px-4 py-24 sm:px-6 sm:py-36">
           <p className="text-[13px] uppercase tracking-[0.16em] text-muted-foreground">
             What PeakProfile is
           </p>
@@ -252,7 +288,7 @@ function Index() {
         </section>
 
         {/* WAITLIST */}
-        <section id="waitlist" className="px-3 pb-3 sm:px-6 sm:pb-6">
+        <section className="px-3 pb-3 sm:px-6 sm:pb-6">
           <Photo
             src={PHOTOS.waitlist.src}
             alt={PHOTOS.waitlist.alt}
@@ -271,7 +307,6 @@ function Index() {
                 Leave your email and I&rsquo;ll notify you when you can create your mountain profile
                 and explore expeditions.
               </p>
-              <WaitlistForm />
             </div>
           </Photo>
         </section>
