@@ -307,6 +307,27 @@ function Index() {
                 Leave your email and I&rsquo;ll notify you when you can create your mountain profile
                 and explore expeditions.
               </p>
+              <button
+                type="button"
+                onClick={scrollToHeroForm}
+                className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/10 px-6 py-3 text-[15px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-charcoal focus-visible:outline-white"
+              >
+                Join the early-access list
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  className="h-4 w-4"
+                >
+                  <path
+                    d="M7 17L17 7M17 7H9M17 7V15"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
             </div>
           </Photo>
         </section>
