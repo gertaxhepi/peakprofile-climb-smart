@@ -8,6 +8,7 @@ type PhotoProps = {
   src: string;
   alt: string;
   position?: string;
+  positionClassName?: string;
   className?: string;
   children?: React.ReactNode;
   overlayClassName?: string;
@@ -21,6 +22,7 @@ export function Photo({
   src,
   alt,
   position = "center",
+  positionClassName,
   className = "",
   overlayClassName,
   children,
@@ -30,8 +32,11 @@ export function Photo({
       <div
         role="img"
         aria-label={alt}
-        className="absolute inset-0 -z-10 bg-cover bg-no-repeat"
-        style={{ backgroundImage: `url(${src})`, backgroundPosition: position }}
+        className={`absolute inset-0 -z-10 bg-cover bg-no-repeat ${positionClassName ?? ""}`}
+        style={{
+          backgroundImage: `url(${src})`,
+          backgroundPosition: positionClassName ? undefined : position,
+        }}
       />
       {overlayClassName ? (
         <div aria-hidden="true" className={`absolute inset-0 -z-10 ${overlayClassName}`} />
