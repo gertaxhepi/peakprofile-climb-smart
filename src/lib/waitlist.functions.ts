@@ -38,11 +38,18 @@ export const joinWaitlist = createServerFn({ method: "POST" })
     }
 
     // Send only after the address is stored. The idempotency key dedupes retries.
-    const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
-    const result = await sendTemplateEmail("waitlist-confirmation", email, {
-      idempotencyKey: `waitlist-confirmation-${email}`,
-      replyTo: REPLY_TO,
-    });
+    // A failed send never blocks the signup — the address is already stored.
+    let emailSent = false;
+    try {
+      const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+      const result = await sendTemplateEmail("waitlist-confirmation", email, {
+        idempotencyKey: `waitlist-confirmation-${email}`,
+        replyTo: REPLY_TO,
+      });
+      emailSent = result.sent;
+    } catch (err) {
+      console.error("waitlist confirmation email failed", err);
+    }
 
-    return { ok: true as const, alreadyJoined: false as const, emailSent: result.sent };
+    return { ok: true as const, alreadyJoined: false as const, emailSent };
   });
