@@ -1,30 +1,21 @@
-export function Logo({ className }: { className?: string }) {
+import blackSymbol from "@/assets/peakprofile-symbol-black.png.asset.json";
+import whiteSymbol from "@/assets/peakprofile-symbol-white.png.asset.json";
+
+type LogoProps = {
+  className?: string;
+  symbolTone?: "black" | "white";
+};
+
+export function Logo({ className, symbolTone = "white" }: LogoProps) {
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
-      <svg
-        width="30"
-        height="18"
-        viewBox="0 0 30 18"
-        fill="none"
-        aria-hidden="true"
-        className="shrink-0"
-      >
-        <path
-          d="M1 16.2L10.4 2.2L19.8 16.2"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M15.6 16.2L21.6 7.3L29 16.2"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          opacity="0.65"
-        />
-      </svg>
+    <span className={`inline-flex items-center gap-2 ${className ?? ""}`}>
+      <img
+        src={symbolTone === "white" ? whiteSymbol.url : blackSymbol.url}
+        alt="PeakProfile mountain and human profile logo."
+        width="51"
+        height="31"
+        className="h-[22px] w-auto shrink-0 object-contain"
+      />
       <span className="text-[15px] font-medium tracking-tight">PeakProfile</span>
     </span>
   );

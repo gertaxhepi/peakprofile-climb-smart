@@ -7,6 +7,8 @@ import { WaitlistForm } from "@/components/peak/WaitlistForm";
 const TITLE = "PeakProfile | Prepare for Your Next Expedition";
 const DESCRIPTION =
   "PeakProfile will help mountaineers understand their expedition readiness and connect with the guides and participants preparing for the same mountain objective.";
+const SOCIAL_IMAGE =
+  "https://peakprofile.app/__l5e/assets-v1/8dc2731c-17e4-450a-ba07-2363da980551/peakprofile-social.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -17,10 +19,18 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://peakprofile.app/" },
+      { property: "og:image", content: SOCIAL_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "PeakProfile mountain and human profile logo." },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: SOCIAL_IMAGE },
+      { name: "twitter:image:alt", content: "PeakProfile mountain and human profile logo." },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://peakprofile.app/" }],
   }),
 });
 
@@ -269,7 +279,7 @@ function Index() {
 
       <footer className="border-t border-border">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 sm:px-6">
-          <Logo className="text-muted-foreground" />
+          <Logo symbolTone="black" className="text-foreground" />
           <p className="text-[13px] text-muted-foreground">
             © {new Date().getFullYear()} PeakProfile — in development
           </p>
