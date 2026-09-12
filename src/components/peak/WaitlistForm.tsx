@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+import { joinWaitlist } from "@/lib/waitlist.functions";
 
 const emailSchema = z
   .string()
@@ -30,13 +30,10 @@ export function WaitlistForm() {
     setStatus("submitting");
     setMessage("");
 
-    const { error } = await supabase
-      .from("waitlist")
-      .insert({ email: parsed.data.toLowerCase() });
-
-    // 23505 = duplicate email; the person is already on the list.
-    if (error && error.code !== "23505") {
-      console.error(error);
+    try {
+      await joinWaitlist({ data: parsed.data });
+    } catch (err) {
+      console.error(err);
       setStatus("error");
       setMessage("Something went wrong. Please try again.");
       return;
