@@ -292,11 +292,11 @@ function Index() {
           <Photo
             src={PHOTOS.waitlist.src}
             alt={PHOTOS.waitlist.alt}
-            position="50% 68%"
+            positionClassName="bg-[position:56%_68%] sm:bg-[position:54%_68%] lg:bg-[position:50%_68%]"
             overlayClassName="bg-charcoal/50"
-            className="rounded-[24px] p-3 sm:rounded-[36px] sm:p-6"
+            className="min-h-[620px] rounded-[24px] p-3 sm:min-h-[680px] sm:rounded-[36px] sm:p-6 lg:min-h-[720px]"
           >
-            <div className="flex flex-col items-center rounded-[18px] border border-white/30 px-5 py-20 text-center text-white sm:rounded-[28px] sm:px-10 sm:py-32">
+            <div className="flex min-h-[596px] flex-col items-center justify-center rounded-[18px] border border-white/30 px-5 py-20 text-center text-white sm:min-h-[632px] sm:rounded-[28px] sm:px-10 sm:py-32 lg:min-h-[656px]">
               <p className="text-[13px] uppercase tracking-[0.16em] text-white/75">
                 PeakProfile is in development
               </p>
